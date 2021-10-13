@@ -5,10 +5,10 @@ filepath = r'C:\Users\danie\Desktop\Alt\Skole\AAU\1. semester\Indledende Program
 
 natfile = io.open(filepath,mode="r",encoding="utf-8") #Open file, read (r) and encoding is UTF-8 (æ, ø, å)
 
-nations = [] #Creaste empty list for nations
 
-for item in natfile: #For each country + newline, add to the list
-    nations.append(item.rstrip("\n")) #rstrip to strip "\n" from the right side of the string
+def nationlist():
+    nations = [] #Creaste empty list for nations
+    for item in natfile: #For each country + newline, add to the list
+        nations.append(item.rstrip("\n")) #rstrip to strip "\n" from the right side of the string
+    return nations
 
-print(nations)
-natfile.close()
