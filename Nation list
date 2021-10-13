@@ -1,0 +1,14 @@
+
+import io #Package for reading "æ, ø and å"
+
+filepath = r'C:\Users\danie\Desktop\Alt\Skole\AAU\1. semester\Indledende Programmering for Datavidenskab\Lektion 7 - Eksamens 1 - Fodbold\nations.txt'
+
+natfile = io.open(filepath,mode="r",encoding="utf-8") #Open file, read (r) and encoding is UTF-8 (æ, ø, å)
+
+nations = [] #Creaste empty list for nations
+
+for item in natfile: #For each country + newline, add to the list
+    nations.append(item.rstrip("\n")) #rstrip to strip "\n" from the right side of the string
+
+print(nations)
+natfile.close()
