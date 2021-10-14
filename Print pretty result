@@ -32,6 +32,9 @@ def pretty(text, spaces): #Formula to format the text from the list
           
 
 #Create sorted list based on index 7 (points)
+#Lambda is an anonymous function, takes x as and argument and x[7] as an expression
+#"key=" creates a new list to sort over - Lambda defines which elements are in the new list
+#Lambda creates a functions, runs it and destroys it again
 sorted_standings = sorted(standings, key = lambda x : x[7],reverse=True)
 
 for item in sorted_standings: #Unmakes standings list, prints each item in list
@@ -59,3 +62,4 @@ Index meanings:
 6 = Total goals opponent scored
 7 = Total points      
 """
+
