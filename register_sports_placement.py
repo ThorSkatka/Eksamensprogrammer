@@ -85,6 +85,7 @@ def who_won(l_score, r_score):
 
 # Adds games played, won, tied and lost to standings for both teams
 def games_wdl(standings, l_team, r_team, result):
+
     # Games played incremented by 1 
     standings[l_team][1] += 1
     standings[r_team][1] += 1
@@ -149,7 +150,6 @@ def add_standings(standings, l_team, r_team, l_score, r_score):
 
 
 print(add_standings(standings, country1, country2, 4, 2))
-
 
 
 '''
