@@ -53,14 +53,19 @@ Created on Wed Oct 13 14:04:33 2021
 '''
 
 #Substitute for standings list
-standings = [['country1',0,0,0,0,0,0,0],
-            ['country2',0,0,0,0,0,0,0]]
+standings = [
+            ['country1',0,0,0,0,0,0,0],
+            ['country2',0,0,0,0,0,0,0]
+            ]
 
-#Index of country in standins
-country1,country2 = 0,1
+#Index of team in standins
+country1, country2 = 0,1
 
-#Index of variables in country in standings
-country,g_played,g_won,g_drawn,g_lost,ttl_scr,ttl_scr_agn,ttl_p = 0,1,2,3,4,5,6,7
+#Index of variables in team in standings
+team,        g_played = 0,1
+g_won,       g_drawn  = 2,3
+g_lost,      ttl_scr  = 4,5
+ttl_scr_agn, ttl_p    = 6,7
 
 
 
@@ -98,17 +103,18 @@ def point_giver(standings, l_team,r_team, l_score,r_score):
 
 #print(point_giver(standings, country1, country2, 3, 0))
 
-# 
+#Adds games played, won, drawn and lost to standings for team
 def games_wdl(l_team, r_team):
     if standings(who_won(l_score, r_score)) == 0: 
         standings[l_team][g_won] += 1
         standings[r_team][g_lost] += 1
         return standings
-    elif: 
-        standings(who_won(l_score, r_score)) == 1:
+    
+    elif standings(who_won(l_score, r_score)) == 1:
         standings[l_team][g_lost] += 1
         standings[r_team][g_won] += 1
         return standings 
+    
     else:
         standings[l_team][g_drawn] += 1
         standings[r_team][g_drawn] += 1 
