@@ -68,7 +68,7 @@ g_lost,      ttl_gls  = 4,5
 ttl_gls_c,   ttl_p    = 6,7
 
 
-
+# Stores who won as result - used to track wins/losses
 def who_won(l_score,r_score):
     # l_team wins: 0
     if l_score > r_score:
@@ -82,49 +82,43 @@ def who_won(l_score,r_score):
     else:
         return 2
 
-def point_giver(standings, l_team,r_team, l_score,r_score):
-    result = who_won(l_score,r_score)
-    
-    #If left team won, add 3 points to their total points
-    if result == 0:
-        standings[l_team][ttl_p] =+ 3
-        return standings
-    
-    ##If right team won, add 3 points to their total points
-    elif result == 1:
-        standings[r_team][ttl_p] =+ 3
-        return standings
-    
-    #If its a draw, add 1 point to each teams total points
-    else:
-        standings[l_team][ttl_p] =+ 1
-        standings[r_team][ttl_p] =+ 1
-        return standings
-
 
 #Adds games played, won, drawn and lost to standings for team
-def games_wdl(standings, l_team,r_team, l_score,r_score):
+def games_wdl(standings, l_team,r_team, result):
     # Games played incremented by 1 
     standings[l_team][1] += 1
     standings[r_team][1] += 1
     
-    # Stores who won as result - used to track wins/losses
-    result = who_won(l_score, r_score)
+    # adds 1 win and 1 loss to left team and right team respectively
+    # adds 3 points for left team
     if result == 0: 
         standings[l_team][g_won] += 1
         standings[r_team][g_lost] += 1
+        
+        standings[l_team][ttl_p] =+ 3
+        
         return standings
     
+    # adds 1 win and 1 loss to right team and left team respectively
+    # adds 3 points for right team
     elif result == 1:
         standings[l_team][g_lost] += 1
         standings[r_team][g_won] += 1
-        return standings 
+        
+        standings[r_team][ttl_p] =+ 3
+        
+        return standings
     
+    # adds 1 draw to both teams
+    # adds 1 point for both teams
     else:
         standings[l_team][g_drawn] += 1
-        standings[r_team][g_drawn] += 1 
-        return standings
+        standings[r_team][g_drawn] += 1
         
+        standings[l_team][ttl_p] =+ 1
+        standings[r_team][ttl_p] =+ 1
+        
+        return standings
 
 
 # total goals scored and total goals conceded 
@@ -140,14 +134,39 @@ def goal_giver(standings,l_team,r_team,l_score,r_score):
     return standings 
 
 
-# 
+# calls all functions and returns standings
 def add_standings(standings,l_team,r_team,l_score,r_score):
-    who_won(l_score, r_score)
-    point_giver(standings, l_team, r_team, l_score, r_score)
-    games_wdl(standings, l_team, r_team, l_score, r_score)
+    #sets who_won as result for this match
+    result = who_won(l_score, r_score)
+    
+    #Adds a win, draw or loss and points for both teams for this match
+    games_wdl(standings, l_team, r_team, result)
+    
+    #Adds the given goals scored to both teams for this match
     goal_giver(standings, l_team, r_team, l_score, r_score)
     
+    return standings
+
+
+print(add_standings(standings, country1, country2, 4, 2))
+
+
+
+'''
+def point_giver(standings, l_team,r_team, result):
+    #If left team won, add 3 points to their total points
+    if result == 0:
+        standings[l_team][ttl_p] =+ 3
+        return standings
     
-
-
-
+    ##If right team won, add 3 points to their total points
+    elif result == 1:
+        standings[r_team][ttl_p] =+ 3
+        return standings
+    
+    #If its a draw, add 1 point to each teams total points
+    else:
+        standings[l_team][ttl_p] =+ 1
+        standings[r_team][ttl_p] =+ 1
+        return standings
+'''
