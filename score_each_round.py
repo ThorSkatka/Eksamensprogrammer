@@ -45,8 +45,4 @@ for j in range(1,7): #Run the program for every file
         rightteam = match[0][1] #First index is either country or score, next index is left or right
         leftscore = match[1][0]
         rightscore = match[1][1]
-        print(leftteam)
-        print(rightteam)
-        print(leftscore)
-        print(rightscore)
-    
+        print(leftteam+' - '+rightteam+' : '+leftscore+' - '+rightscore)
