@@ -64,8 +64,8 @@ country1, country2 = 0,1
 #Index of variables in team in standings
 team,        g_played = 0,1
 g_won,       g_drawn  = 2,3
-g_lost,      ttl_scr  = 4,5
-ttl_scr_agn, ttl_p    = 6,7
+g_lost,      ttl_gls  = 4,5
+ttl_gls_c,   ttl_p    = 6,7
 
 
 
@@ -101,16 +101,21 @@ def point_giver(standings, l_team,r_team, l_score,r_score):
         standings[r_team][ttl_p] =+ 1
         return standings
 
-#print(point_giver(standings, country1, country2, 3, 0))
 
 #Adds games played, won, drawn and lost to standings for team
-def games_wdl(l_team, r_team):
-    if standings(who_won(l_score, r_score)) == 0: 
+def games_wdl(standings, l_team,r_team, l_score,r_score):
+    # Games played incremented by 1 
+    standings[l_team][1] += 1
+    standings[r_team][1] += 1
+    
+    # Stores who won as result - used to track wins/losses
+    result = who_won(l_score, r_score)
+    if result == 0: 
         standings[l_team][g_won] += 1
         standings[r_team][g_lost] += 1
         return standings
     
-    elif standings(who_won(l_score, r_score)) == 1:
+    elif result == 1:
         standings[l_team][g_lost] += 1
         standings[r_team][g_won] += 1
         return standings 
@@ -120,3 +125,29 @@ def games_wdl(l_team, r_team):
         standings[r_team][g_drawn] += 1 
         return standings
         
+
+
+# total goals scored and total goals conceded 
+def goal_giver(standings,l_team,r_team,l_score,r_score):
+    # Adds goals scored and goals conceded for left team 
+    standings[l_team][ttl_gls] += l_score
+    standings[l_team][ttl_gls_c] += r_score
+    
+    # Adds goals scored and goals conceded for right team
+    standings[r_team][ttl_gls] += r_score
+    standings[r_team][ttl_gls_c] += l_score
+    
+    return standings 
+
+
+# 
+def add_standings(standings,l_team,r_team,l_score,r_score):
+    who_won(l_score, r_score)
+    point_giver(standings, l_team, r_team, l_score, r_score)
+    games_wdl(standings, l_team, r_team, l_score, r_score)
+    goal_giver(standings, l_team, r_team, l_score, r_score)
+    
+    
+
+
+
