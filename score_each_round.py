@@ -189,14 +189,14 @@ def pretty(text, spaces): #Formula to format the text from the list
 sorted_standings = sorted(standings, key = lambda x : x[7],reverse=True)
 
 for item in sorted_standings: #Unmakes standings list, prints each item in list
-    team_t    = pretty(item[team],10) #For every list in standings, run the function
-    plays     = pretty(item[g_played],3)
-    wins      = pretty(item[g_won],3)
-    draws     = pretty(item[g_drawn],3)
-    losses    = pretty(item[g_lost],3)
-    goals     = pretty(item[ttl_gls],3)
+    team_t    = pretty(item[team]     ,10) #For every list in standings, run the function
+    plays     = pretty(item[g_played] ,3)
+    wins      = pretty(item[g_won]    ,3)
+    draws     = pretty(item[g_drawn]  ,3)
+    losses    = pretty(item[g_lost]   ,3)
+    goals     = pretty(item[ttl_gls]  ,3)
     g_against = pretty(item[ttl_gls_c],3)
-    points    = pretty(item[ttl_p],3)
+    points    = pretty(item[ttl_p]    ,3)
     result    = team_t + plays + wins + draws + losses + goals + "-  " + g_against + points
 
     print(result)
