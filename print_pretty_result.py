@@ -4,22 +4,22 @@ import io #Package for reading "æ, ø and å"
 
 filepath = r'C:\Users\danie\Desktop\Alt\Skole\AAU\1. semester\Indledende Programmering for Datavidenskab\Lektion 7 - Eksamens 1 - Fodbold\nations.txt'
 
-natfile = io.open(filepath,mode="r",encoding="utf-8") #Open file, read (r) and encoding is UTF-8 (æ, ø, å)
+teamfile = io.open(filepath,mode="r",encoding="utf-8") #Open file, read (r) and encoding is UTF-8 (æ, ø, å)
 
-nations = []
+teams = []
 standings = []
 
-def nationlist():
-    for item in natfile: #For each country + newline, add to the list
-        nations.append(item.rstrip("\n")) #rstrip to strip "\n" from the right side of the string
-    return nations
+def teamlist():
+    for item in teamfile: #For each country + newline, add to the list
+        teams.append(item.rstrip("\n")) #rstrip to strip "\n" from the right side of the string
+    return teams
 
-nationlist() #Add items to nations
 
-for nation in nationlist(): #Create lists within lists for every nation
-    a = [nation,0,0,0,0,0,0,0] #New list with nation and 7 zeros
+teamlist() #Add items to nations
+
+for team in teamlist(): #Create lists within lists for every nation
+    a = [team,0,0,0,0,0,0,0] #New list with nation and 7 zeros
     standings.append(a)
-
 
 
 def pretty(text, spaces): #Formula to format the text from the list
@@ -48,18 +48,4 @@ for item in sorted_standings: #Unmakes standings list, prints each item in list
     points = pretty(item[7],1)
     result = team + plays + wins + draws + losses + goals + "- " + g_against + points
     print(result)
-
-
-"""
-Index meanings:
-    
-0 = Nation
-1 = Games played
-2 = Games won
-3 = Games draw
-4 = Games lost
-5 = Total goals scored
-6 = Total goals opponent scored
-7 = Total points      
-"""
 
