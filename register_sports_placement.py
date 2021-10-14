@@ -2,7 +2,7 @@
 """
 Created on Wed Oct 13 14:04:33 2021
 
-@author: mdsan
+@author: mdsan, ericv
 """
 
 #Exam program
