@@ -2,6 +2,9 @@
 Første eksamens opgave i IPD: Sports resultater
 
 @authors: Mads Andersen, Eric van den Brand, Daniel Hansen, Thor Skatka og Andreas Hansen
+
+Beskrivelse:
+Programmet tager match data fra en gruppe tekst filer, og ved hjælp af dette laver et sorteret og overskueligt scoreboard. 
 '''
 
 import io #Package for reading "æ, ø and å"
@@ -19,7 +22,7 @@ g_lost,      ttl_gls  = 4,5
 ttl_gls_c,   ttl_p    = 6,7
 
 
-# ! filling standings with teams and scorecards
+# ! filling standings with teams and scorecards (Written by: Andreas, Daniel and Thor)
 nations_file = 'nations.txt'
 team_file = io.open(nations_file,mode="r",encoding="utf-8") #Open file, read (r) and encoding is UTF-8 (æ, ø, å)
 
@@ -40,14 +43,11 @@ def add_team_scorecard(standings):
     return standings
 
 
-#for i in standings: #Set index 7 to a random number for testing
-#    i[7] = random.randint(0,20)
-
 team_list() #Add items to nations
 add_team_scorecard(standings) # Adds scorecards to standings
 
 
-# ! Calculation and implimention scores and points in standings
+# ! Calculation and implimention scores and points in standings (Written by: Eric and Mads)
 # Finds index of team in standings
 def find_position_in_standings(standings,team):
     for entry in standings:
@@ -139,53 +139,53 @@ def add_standings(standings, l_team, r_team, l_score, r_score):
     return standings
 
 
-# ! Makes list of rounds and matches in them
-for j in range(1,amount_of_rounds+1): #Run the program for every file
+# ! Makes list of rounds and matches in them (Written by: Andreas, Daniel and Thor)
+for j in range(1,amount_of_rounds+1): # Run the program for every file
     file_path = 'round'+str(j)+'.txt'
-    this_round_file = io.open(file_path,mode="r",encoding="utf-8") #Open file, read (r) and encoding is UTF-8 (æ, ø, å)
+    this_round_file = io.open(file_path,mode="r",encoding="utf-8") # Open file, read (r) and encoding is UTF-8 (æ, ø, å)
     
-    this_round = this_round_file.read() #Take strings from file
+    this_round = this_round_file.read() # Take strings from file
     
-    match_list = this_round.split('\n') #Create a list where we split file content by newline
+    match_list = this_round.split('\n') # Create a list where we split file content by newline
     
-    type_list = [] #Prepare a list split by goals and nations
+    type_list = [] # Prepare a list split by goals and nations
     
-    for item in match_list: #Take every list from matchlist
-        i = item.split('\t') #Split it by "tab" (large space) - Creates new lists
-        type_list.append(i) #Add new lists to the typelist
+    for item in match_list: # Take every list from matchlist
+        i = item.split('\t') # Split it by "tab" (large space) - Creates new lists
+        type_list.append(i) # Add new lists to the typelist
     
-    match_type_list = [] #List that splits nations and scores into seperate lists by match
+    match_type_list = [] # List that splits nations and scores into seperate lists by match
     
     for types in type_list:
-        match_team_list = types[0].split(" - ") #Split the list with nations into items by " - " - Changes an item into more items [Danmark-Skotland] becomes [Danmark,Skotland]
-        match_score_list = types[1].split(" - ") #Split the list of scores into items by " - " - Changes an item into more items [0-2] becomes [0,2]
-        match_type_list.append([match_team_list ,match_score_list]) #Append the new lists
+        match_team_list = types[0].split(" - ") # Split the list with nations into items by " - " - Changes an item into more items [Danmark-Skotland] becomes [Danmark,Skotland]
+        match_score_list = types[1].split(" - ") # Split the list of scores into items by " - " - Changes an item into more items [0-2] becomes [0,2]
+        match_type_list.append([match_team_list ,match_score_list]) # Append the new lists
 
-    #Index of variables in match and teams/scores in match
+    # Index of variables in match and teams/scores in match
     teams,scores =    0,1
     l_team,r_team =   0,1
     l_score,r_score = 0,1
 
-    for match in match_type_list: #Take values for nations and scores individually
-        l_team_m =  match[teams][l_team] #Values to be extracted to standings
-        r_team_m =  match[teams][r_team] #First index is either country or score, next index is left or right
+    for match in match_type_list: # Take values for nations and scores individually
+        l_team_m =  match[teams][l_team] # Values to be extracted to standings
+        r_team_m =  match[teams][r_team] # First index is either country or score, next index is left or right
         l_score_m = int(match[scores][l_score])
         r_score_m = int(match[scores][r_score])
         
         add_standings(standings, l_team_m, r_team_m, l_score_m, r_score_m)
 
 
-# ! Format the text from the list
+# ! Format the text from the list (Written by: Andreas, Daniel and Thor)
 def pretty(text, spaces): #Formula to format the text from the list
     text = str(text) #Ensure type is str
     return text+((spaces-len(text))*" ") #Make sure the returns a value
 
 
-# ! make and print scoreboard
-#Create sorted list based on index 7 (points)
-#Lambda is an anonymous function, takes x as and argument and x[7] as an expression
-#"key=" creates a new list to sort over - Lambda defines which elements are in the new list
-#Lambda creates a functions, runs it and destroys it again
+# ! make and print scoreboard (Written by: Andreas, Daniel and Thor)
+# Create sorted list based on index 7 (points)
+# Lambda is an anonymous function, takes x as and argument and x[7] as an expression
+# "key=" creates a new list to sort over - Lambda defines which elements are in the new list
+# Lambda creates a functions, runs it and destroys it again
 sorted_standings = sorted(standings, key = lambda x : x[7],reverse=True)
 
 for item in sorted_standings: #Unmakes standings list, prints each item in list
@@ -197,6 +197,6 @@ for item in sorted_standings: #Unmakes standings list, prints each item in list
     goals     = pretty(item[ttl_gls]  ,3)
     g_against = pretty(item[ttl_gls_c],3)
     points    = pretty(item[ttl_p]    ,3)
-    result    = team_t + plays + wins + draws + losses + goals + "-  " + g_against + points
+    result    = team_t + plays + wins + draws + losses + goals + "- " + g_against + points
 
     print(result)
