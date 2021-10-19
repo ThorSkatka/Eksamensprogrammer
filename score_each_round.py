@@ -44,6 +44,8 @@ def add_team_scorecard(standings):
 
 
 team_list() #Add items to nations
+team_file.close()# Close team_file
+
 add_team_scorecard(standings) # Adds scorecards to standings
 
 
@@ -147,6 +149,9 @@ for j in range(1,amount_of_rounds+1): # Run the program for every file
     this_round = this_round_file.read() # Take strings from file
     
     match_list = this_round.split('\n') # Create a list where we split file content by newline
+    
+    # Close round'j'.txt file
+    this_round_file.close()
     
     type_list = [] # Prepare a list split by goals and nations
     
