@@ -191,9 +191,9 @@ def pretty(text, spaces): #Formula to format the text from the list
 # "key=" creates a new list to sort over - Lambda defines which elements are in the new list
 # Lambda creates a functions, runs it and destroys it again
 
-#First sort alphabetaically, then sort by goal difference, then by points
-#This makes it so that if points are the same, then goal difference matters,
-#and if goal difference is the same, then alphabet matters
+# First sort alphabetaically, then sort by goal difference, then by points
+# This makes it so that if points are the same, then goal difference matters,
+# and if goal difference is the same, then alphabet matters
 sorted_standings = sorted(standings, key = lambda x : x[0],reverse=False)
 sorted_standings = sorted(sorted_standings, key = lambda x : x[5]-x[6],reverse=True)
 sorted_standings = sorted(sorted_standings, key = lambda x : x[7],reverse=True)
