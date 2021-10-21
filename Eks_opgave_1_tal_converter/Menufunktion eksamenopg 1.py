@@ -121,22 +121,22 @@ def menu():
             
         # Convert number from system to system based on user input  
         if from_sys == '1' and to_sys == '2': # int to bin
-            print(int_to_bin(int(user_number)))
+            int_to_bin(int(user_number))
         elif from_sys == '1' and to_sys == '3': # int to rom
-            print(int_to_rom(int(user_number)))
+            int_to_rom(int(user_number))
         elif from_sys == '2' and to_sys == '3': # bin to rom
             bin_int = bin_to_int(user_number)
-            print(int_to_rom(bin_int)) # rom to bin
+            int_to_rom(bin_int) # rom to bin
         elif from_sys == '3' and to_sys == '2':
             rom_int = rom_to_int(user_number)
-            print(int_to_bin(rom_int))
+            int_to_bin(rom_int)
         # User tries to convert from and to the same numerical system
         elif from_sys == to_sys:
             print('You are trying to convert one numerical system to the same. Please try again')
             menu()
         else:
             print('Invalid input.')
-            menu()
+            return #Change to menu()
         
     except:    
             print('Invalid input')
