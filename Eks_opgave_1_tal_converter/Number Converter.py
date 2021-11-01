@@ -13,6 +13,9 @@ blandt binære tal, romer tal og 10 tals systemet.
 P.S.: Navn ved afsnit indikerer afsnittetes hovedforfatter.
 '''
 
+rom_num = ['M' , 'CM' , 'D' , 'CD' , 'C' , 'XC' , 'L' , 'XL' , 'X' , 'IX' , 'V' ,'IV', 'I' ]
+integers = [1000 , 900 , 500 , 400 , 100 , 90 , 50 , 40 , 10 , 9 , 5 , 4 , 1]
+
 
 # ! integer formatting function (Eric)
 def format_number(number):
@@ -42,9 +45,6 @@ def int_to_bin(x):
 
 # ! par_int_rom and int_to_rom convert integers to roman numerals (Andreas, Eric og Thor)
 def par_int_rom(x):
-    rom_num = ['M' , 'CM' , 'D' , 'CD' , 'C' , 'XC' , 'L' , 'XL' , 'X' , 'IX' , 'V' ,'IV', 'I' ]
-    integers = [1000 , 900 , 500 , 400 , 100 , 90 , 50 , 40 , 10 , 9 , 5 , 4 , 1]
-    
     i = 0
     rom_str = '' # Creates en empty string
     
@@ -97,9 +97,6 @@ def bin_to_int(x):
 
 # ! par_rom_int and rom_to_int convert roman numerals to integers (Eric og Thor)
 def par_rom_int(x):
-    rom_num = ['M' , 'CM' , 'D' , 'CD' , 'C' , 'XC' , 'L' , 'XL' , 'X' , 'IX' , 'V' ,'IV', 'I' ]
-    integers = [1000 , 900 , 500 , 400 , 100 , 90 , 50 , 40 , 10 , 9 , 5 , 4 , 1]
-    
     value = 0
     
     # Goes through rom_num list, if first part of x == rom_num[i]: value += integers[i]
@@ -145,27 +142,45 @@ def menu():
         #4. Terminate Program
         --->: ''')
         
-        if from_sys == '4': # Terminates program
-            print('You terminated the program')
-            
-            return
+        assert from_sys in ['1', '2', '3', '4'] # Checks if input is valid
         
         user_number = input('''Please enter your number (if its a roman numeral of 4000 
         and above, please type a space after the part that needs to be multiple by 1000): 
         --->: ''')
+        
+        if from_sys == '1': # Sets from_sys to int, if decimal was chosen
+            user_number = int(user_number)
+        
+        if from_sys == '2':
+            # Creates set of all unique elements in user_number
+            # Checks if user_number includes only 0 and 1
+            assert set(user_number) == {'0', '1'}
+        
+        if from_sys == '3': # Checks if roman numeral is invalid input
+            list_u = list(user_number)
+            
+            for i in list_u:
+                assert i in rom_num
+        
+        if from_sys == '4': # Terminates program
+            print('You terminated the program')
+            
+            return
 
         to_sys = input('''Please choose the numerical system you want to convert to
         #1. Decimal
         #2. Binary
         #3. Roman
         --->: ''')
+        
+        assert to_sys in ['1', '2', '3'] # Checks if input is valid
             
         # Convert number from system to system based on user input  
         if from_sys == '1' and to_sys == '2': # int to bin
-            print(int_to_bin(int(user_number)))
+            print(int_to_bin(user_number))
             
         elif from_sys == '1' and to_sys == '3': # int to rom
-            print(int_to_rom(int(user_number)))
+            print(int_to_rom(user_number))
             
         elif from_sys == '2' and to_sys == '1': # bin to int
             print(bin_to_int(user_number))
@@ -181,7 +196,7 @@ def menu():
         elif from_sys == '3' and to_sys == '2': # rom to bin
             rom_int = rom_to_int(user_number)
             
-            print(int_to_bin(int(rom_int))) # int to bin
+            print(int_to_bin(rom_int)) # int to bin
             
         # User tries to convert from and to the same numerical system
         elif from_sys == to_sys:
@@ -190,12 +205,12 @@ def menu():
             menu()
             
         else: # Loops for invalid input
-            print('Invalid input: from_sys or to_sys error')
+            print('Something unexpected went wrong')
             
             menu()
         
     except: # Loops for invalid input
-            print('Invalid input: user_number error')
+            print('Invalid input')
             
             menu()
 
