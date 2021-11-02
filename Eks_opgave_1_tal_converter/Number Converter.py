@@ -160,7 +160,8 @@ def menu():
             list_u = list(user_number)
             
             for i in list_u:
-                assert i in rom_num
+                if i != ' ':
+                    assert i in rom_num
         
         if from_sys == '4': # Terminates program
             print('You terminated the program')

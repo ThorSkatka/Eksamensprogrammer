@@ -160,7 +160,8 @@ def menu():
             list_u = list(user_number)
             
             for i in list_u:
-                assert i in rom_num
+                if i != ' ':
+                    assert i in rom_num
         
         if from_sys == '4': # Terminates program
             print('You terminated the program')
@@ -185,7 +186,7 @@ def menu():
         elif from_sys == '1':
             if to_sys == '2': # int to bin
                 print(int_to_bin(user_number))
-                
+            
             elif to_sys == '3': # int to rom
                 print(int_to_rom(user_number))
         
@@ -195,7 +196,7 @@ def menu():
             
             elif to_sys == '3': # bin to rom
                 bin_int = bin_to_int(user_number)
-                
+
                 print(int_to_rom(bin_int)) # int to rom
         
         elif from_sys == '3':
@@ -204,7 +205,7 @@ def menu():
             
             elif to_sys == '2': # rom to bin
                 rom_int = rom_to_int(user_number)
-            
+                
                 print(int_to_bin(rom_int)) # int to bin
             
         else: # Loops for invalid input
