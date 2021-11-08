@@ -18,7 +18,7 @@ integers = [1000 , 900 , 500 , 400 , 100 , 90 , 50 , 40 , 10 , 9 , 5 , 4 , 1]
 
 
 # ! integer formatting function (Eric)
-def format_number(number):
+def FormatNumber(number):
     # Formates number with , for added readability
     # f. eks.: 1000000 --> 1,000,000
     ready_number = '{:,}'.format(number)
@@ -26,8 +26,8 @@ def format_number(number):
     return ready_number
 
 
-# ! int_to_bin to convert integer to binary (Daniel)
-def int_to_bin(x):
+# ! IntToBin to convert integer to binary (Daniel)
+def IntToBin(x):
     # Create an empty string, then take the entered integer and modulus by 2
     a = ''
     
@@ -43,8 +43,8 @@ def int_to_bin(x):
     return z
         
 
-# ! par_int_rom and int_to_rom convert integers to roman numerals (Andreas, Eric og Thor)
-def par_int_rom(x):
+# ! ParIntRom and IntToRom convert integers to roman numerals (Andreas, Eric og Thor)
+def ParIntRom(x):
     i = 0
     rom_str = '' # Creates en empty string
     
@@ -60,14 +60,14 @@ def par_int_rom(x):
     return rom_str # It then returns rom_str
 
  
-def int_to_rom(x):
+def IntToRom(x):
     if x >= 4000: # If x >= 4000, it splits x in two parts:
         big = x // 1000 # Big part, wich are the roman numerals that need to be multiplied by 1000
         tiny = x - big * 1000 # And tiny part, wich is whats left of x after big is subtracted
         
-        # big_rom and tiny_rom are then made by par_int_rom
-        big_rom = par_int_rom(big)
-        tiny_rom = par_int_rom(tiny)
+        # big_rom and tiny_rom are then made by ParIntRom
+        big_rom = ParIntRom(big)
+        tiny_rom = ParIntRom(tiny)
         
         roof = '_' * len(big_rom) # roof is then made in length of big_rom
         print_ready_rom = f'{big_rom}{tiny_rom}' # big_rom and tiny_rom are added together
@@ -77,12 +77,12 @@ def int_to_rom(x):
         
         return print_it_all
         
-    else: # If x < 4000 it just returns par_int_rom(x)
-        return par_int_rom(x)
+    else: # If x < 4000 it just returns ParIntRom(x)
+        return ParIntRom(x)
     
 
-# ! bin_to_int converts binary numbers to integers (Daniel)
-def bin_to_int(x):
+# ! BinToInt converts binary numbers to integers (Daniel)
+def BinToInt(x):
     x = [int(x) for x in str(x)] # Make a list of the digits.
     t = 0 # Make a 'total'
     
@@ -90,13 +90,13 @@ def bin_to_int(x):
     for num in x: 
         t = 2 * t + num
         
-    number = format_number(t)
+    number = FormatNumber(t)
     
     return number
 
 
-# ! par_rom_int and rom_to_int convert roman numerals to integers (Eric og Thor)
-def par_rom_int(x):
+# ! ParIntRom and RomToInt convert roman numerals to integers (Eric og Thor)
+def ParRomInt(x):
     value = 0
     
     # Goes through rom_num list, if first part of x == rom_num[i]: value += integers[i]
@@ -112,27 +112,28 @@ def par_rom_int(x):
     return value
 
 
-def rom_to_int(x):
+def RomToInt(x):
+    # Space means that the first part is multiplied by 1000
     if ' ' in x:
         # Splits string into big_rom and tiny_rom
         big_rom,tiny_rom = [str(i) for i in x.split(' ')]
         
-        # Runs par_rom_int for big_rom and tiny_rom
-        big_int = par_rom_int(big_rom)
-        tiny_int = par_rom_int(tiny_rom)
+        # Runs ParIntRom for big_rom and tiny_rom
+        big_int = ParRomInt(big_rom)
+        tiny_int = ParRomInt(tiny_rom)
         
         # Adds big_int * 1000 and tiny_int together
         number = (big_int * 1000) + tiny_int
         
-        return format_number(number)
+        return FormatNumber(number)
     
-    else: # If x has no ' ', run par_rom_int and return result
-        number = par_rom_int(x)
-        return format_number(number)
+    else: # If x has no ' ', run ParIntRom and return result
+        number = ParRomInt(x)
+        return FormatNumber(number)
 
 
 # ! Menu function is defined (Andreas og Mads)
-def menu():
+def Menu():
     try:
         # Ask user for input
         from_sys = input('''Please choose your number system
@@ -181,42 +182,42 @@ def menu():
         if from_sys == to_sys:
             print('You are trying to convert one numerical system to the same. Please try again')
             
-            menu()
+            Menu()
         
         elif from_sys == '1':
             if to_sys == '2': # int to bin
-                print(int_to_bin(user_number))
+                print(IntToBin(user_number))
             
             elif to_sys == '3': # int to rom
-                print(int_to_rom(user_number))
+                print(IntToRom(user_number))
         
         elif from_sys == '2':
             if to_sys == '1': # bin to int
-                print(bin_to_int(user_number))
+                print(BinToInt(user_number))
             
             elif to_sys == '3': # bin to rom
-                bin_int = bin_to_int(user_number)
+                bin_int = BinToInt(user_number)
 
-                print(int_to_rom(bin_int)) # int to rom
+                print(IntToRom(bin_int)) # int to rom
         
         elif from_sys == '3':
             if to_sys == '1': # rom to int
-                print(rom_to_int(user_number))
+                print(RomToInt(user_number))
             
             elif to_sys == '2': # rom to bin
-                rom_int = rom_to_int(user_number)
+                rom_int = RomToInt(user_number)
                 
-                print(int_to_bin(rom_int)) # int to bin
+                print(IntToBin(rom_int)) # int to bin
             
         else: # Loops for invalid input
             print('Something unexpected went wrong')
             
-            menu()
+            Menu()
         
     except: # Loops for invalid input
             print('Invalid input')
             
-            menu()
+            Menu()
 
 
-menu()
+Menu()
