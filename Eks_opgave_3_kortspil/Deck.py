@@ -33,6 +33,6 @@ class Deck:
 
 # q = Stack.cshuffle(cards1)
 # p = Stack.cplay(cards1)
-z = Stack.__add__(cards1, cards2)
+z = Deck.__add__(cards1, cards2)
 
 
