@@ -134,14 +134,22 @@ class KrigTheGame:
         return
 
     def runRound(self):
-        print(self.players)
+        self.makeAllPlay()
 
+        # i = vuder højeste
+
+        winner = self.players[i]
+
+        winner.discard += self.table
+        self.table = []
+
+        
+
+    def makeAllPlay(self):
         for player in self.players:
             card = player.play_card()
 
             self.table += Deck(deck = [card])
-            
-
 
 
 Krig = KrigTheGame()
