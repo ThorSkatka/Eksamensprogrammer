@@ -16,12 +16,16 @@ class Card:
         if self.rank == 0:
             return ""
         else:
-            return str(rank[self.rank]) + " of " + self.suit
+            return str(rank[self.rank]) + " of " + str(suits[self.suit])
     def __lt__(self,other):
-        return (self.rank)<(other.rank)
+        return (self.suit,self.rank)<(other.suit,other.rank)
 
 
-suit = ['Clubs', 'Hearts', 'Spades', 'Diamonds']
+suits = {1: 'Clubs',
+         2: 'Diamonds',
+         3: 'Hearts',
+         4: 'Spades'}
+
 rank =      {2:2,
              3:3,
              4:4,
@@ -36,10 +40,9 @@ rank =      {2:2,
              13: 'King',
              14: 'Ace'}
 
-card1 = Card(suit=suit[random.randint(0,3)], rank=random.randint(2,14))
-card2 = Card(suit=suit[random.randint(0,3)], rank=random.randint(2,14))
+card1 = Card(suit=random.randint(1,4), rank=10)
+card2 = Card(suit=random.randint(1,4), rank=10)
 
 print(card1)
 print(card2)
-
-print(card1 < card2)
+print(card1<card2)
