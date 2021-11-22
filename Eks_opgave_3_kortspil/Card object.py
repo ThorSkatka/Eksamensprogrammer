@@ -8,7 +8,7 @@ import random
 
 
 class Card:
-    """Dette er hvert individuelt kort"""
+    """Definér et kort"""
     def __init__(self, suit = "",rank = 0):
         self.suit = suit
         self.rank = rank
