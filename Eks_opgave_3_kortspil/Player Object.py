@@ -1,6 +1,39 @@
 import random
 
 
+class Card:
+    """Definér et kort"""
+    def __init__(self, suit = "",rank = 0):
+        self.suit = suit
+        self.rank = rank
+    def __str__(self):
+        if self.rank == 0:
+            return ""
+        else:
+            return str(rank[self.rank]) + " of " + str(suits[self.suit])
+    def __lt__(self,other):
+        return (self.suit,self.rank)<(other.suit,other.rank)
+
+
+suits = {1: 'Clubs',
+         2: 'Diamonds',
+         3: 'Hearts',
+         4: 'Spades'}
+
+rank =      {2:2,
+             3:3,
+             4:4,
+             5:5,
+             6:6,
+             7:7,
+             8:8,
+             9:9,
+             10:10,
+             11: 'Jack',
+             12: 'Queen',
+             13: 'King',
+             14: 'Ace'}
+
 
 # ! Defines what a deck is
 class Deck:
@@ -14,9 +47,6 @@ class Deck:
         random.shuffle(self.deck)
         return self.deck
 
-    # * Play and remove top card from deck
-    def play(self):
-        return self.deck.pop(0)
     
     def deal(self, amount):
         dealt_hand = self.deck[:amount]
@@ -39,15 +69,24 @@ class Player:
     
     # * Deals x amount of cards from players hand
     def play_card(self):
-        return self.hand.play()
+        if self.still_playing(self):
+            if len(self.hand) == 0:
+                self.reshuffle(self)
+            self.hand.deal(self,1)
+        else:     
+            return False, f'Player {self.name} is no longer playing'
     
     # * Vital status for given player
-    def vital_status(self):
+    def still_playing(self):
         # 0 for dead and 1 for living player
         if len(self.hand.deck) + len(self.discard.deck) == 0:
-            return 0
+            return False
         else:
-            return 1
+            return True
+    
+    def reshuffle(self):
+        self.__add__(self.hand,self.discard)
+        self.discard = []
     
     # TODO random name
     # TODO hand as Deck
