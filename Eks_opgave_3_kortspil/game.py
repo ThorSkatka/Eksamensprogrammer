@@ -122,7 +122,13 @@ class KrigTheGame:
         return players_at_table
     
     def divide_stack(self):
-        pass
+        amount = len(self.card_stack) // self.player_count
+        
+        if len(self.card_stack) % self.player_count != 0:
+            leftovers = 52 - (amount * self.player_count)
+        
+        
+        return
 
 Krig = KrigTheGame()
     # TODO Definer liste af spillere
