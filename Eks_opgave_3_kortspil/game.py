@@ -97,6 +97,9 @@ class KrigTheGame:
         
         self.deck_count = deck_count # Amount of decks used
         self.card_stack = self.gen_deck() # Generate this games deck
+
+
+        self.table = Deck()
     
     # * Generate deck
     def gen_deck(self):
@@ -130,6 +133,17 @@ class KrigTheGame:
         
         return
 
+    def runRound(self):
+        print(self.players)
+
+        for player in self.players:
+            card = player.play_card()
+
+            self.table += Deck(deck = [card])
+            
+
+
+
 Krig = KrigTheGame()
     # TODO Definer liste af spillere
     # TODO Vuder vinder af runden
@@ -139,3 +153,10 @@ Krig = KrigTheGame()
     # TODO Giv bordet til vinderen
     # TODO Dræb spiller
     # TODO Vurder vinderen
+
+
+Krig.runRound()
+
+print(Krig.table)
+
+print('done')
